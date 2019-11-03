@@ -1,0 +1,8 @@
+<?php
+	if ($num % 2 == 0) {
+		print $num . "Àº Â¦¼ö";
+	}
+	else {
+		print $num . "Àº È¦¼ö";
+	}
+?>

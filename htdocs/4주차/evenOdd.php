@@ -1,0 +1,6 @@
+<?PHP
+ if ($number % 2 == 0)
+	print $number . "Àº(´Â) Â¦¼ö";
+ else
+	print $number . "Àº(´Â) È¦¼ö";
+?>

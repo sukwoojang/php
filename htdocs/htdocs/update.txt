@@ -1,0 +1,3 @@
+<a href='update.php?u_stud_id=$row[stud_id]&u_stud_name=$row[stud_name]' target='home'>수정</a>
+
+?를 사용하여 변수전달

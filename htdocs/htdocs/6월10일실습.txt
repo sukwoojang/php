@@ -1,0 +1,17 @@
+length(subject) as size
+
+<script>window.alert($---)
+
+<?php
+$x = 3;
+$y = 4;
+$z = $x + $y;
+print "$x + $y = $z<br>";
+print $x . "+" . $y . "=" . $z . "<br>";
+print $x . "+" . $y . "=" . $x + $y;
+?>
+
+<a href='JavaScript:history.go(-1)'>cancel</a>
+
+\n
+

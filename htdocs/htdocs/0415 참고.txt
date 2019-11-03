@@ -1,0 +1,16 @@
+$sql="select stud_name from stud_mst where stud_id like '$id'";
+========================================================
+$id = $id . "%";
+========================================================
+$sql="select count(*) from stud_mst where stud_id like '$id'";
+$result=mysql_query($sql,$connect);
+$row=mysql_fetch_array($result);
+print $row[0];
+========================================================
+if ($row[0] != 0) {
+   print "<script>window.alert('조회완료')</script>";
+}
+else {
+   print "<script>window.alert('자료없음')</script>";
+}
+========================================================

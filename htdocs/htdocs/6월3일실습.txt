@@ -1,0 +1,120 @@
+﻿while($i != 1) {
+	$space = $space . "&nbsp;&nbsp;";
+	$i = $i - 1;
+}
+
+if ($row[level] == 1)
+   $level = $row[seq1];
+else
+   $level = '&nbsp;';
+
+print "$level $space<a href='./bbs_insert.php?reg_date=$row[reg_date]' target='result'>$row[reg_date]&nbsp;&nbsp;&nbsp;$row[stud_name]&nbsp;&nbsp;&nbsp;$row[title]</a><br>";
+
+===============================================================================================
+
+print "<a href='./bbs_insert.php' target='home'>글쓰기</a>";
+
+<a href='./bbs_insert.php?reg_date=$row[reg_date]' target='home'> </a>
+
+===============================================================================================
+
+print "<form name=insert method=post action='$PHP_SELF'>";
+print "<input type=hidden name='flag'>";
+
+   print "작성일 : $reg_date<br>";
+   print "<input type=hidden name='reg_date' value='$row[reg_date]'>";
+
+print "제목 : <input type=text name='title' size='50' maxlength='50' value='$row[title]'><br>";
+print "내용 : <textarea name='subject' cols='80' rows='10'>$row[subject]</textarea><br>";
+
+   print "<a href='JavaScript:f_insert()'>등록</a>";
+
+   print "<a href='JavaScript:f_update()'>수정</a>";
+
+print "</form>";
+
+===============================================================================================
+
+session_start();
+
+$connect=mysql_connect("localhost","root","");
+mysql_select_db("php",$connect);
+
+$sql="select * from bbs where reg_date='$reg_date'";
+$result=mysql_query($sql,$connect);
+
+if(mysql_num_rows($result)!=0){
+   mysql_data_seek($result,0);
+   $row=mysql_fetch_array($result);
+
+}
+
+if(mysql_num_rows($result)==0) {
+
+}
+
+if($user_id == $row[stud_id]){
+
+}
+
+===============================================================================================
+
+<script language = "javascript">
+
+function f_insert(){
+  document.insert.flag.value = 'I';
+  document.insert.submit();
+}
+
+function f_update(){
+  document.insert.flag.value = 'U';
+  document.insert.submit();
+}
+
+</script>
+
+===============================================================================================
+
+if($flag=='I'){
+
+	$connect=mysql_connect("localhost","root","");
+	mysql_select_db("php",$connect);
+
+	$sql="select max(seq1) as max_seq from bbs";
+	$result=mysql_query($sql,$connect);
+
+	mysql_data_seek($result,0);
+	$row=mysql_fetch_array($result);
+
+	$sql="";
+	$result=mysql_query($sql,$connect);
+	if($result==1){
+		print "<script>window.alert('등록되었습니다.')</script>";
+		print "<meta http-equiv='refresh' content='0;URL=bbs.php'>";
+	}
+	else{
+ 		$error=mysql_error();		
+		print "$sql ($error)";
+	}  
+}
+
+===============================================================================================
+
+if($flag=='U'){
+
+	$connect=mysql_connect("localhost","root","");
+	mysql_select_db("php",$connect);
+
+	$sql="";
+	$result=mysql_query($sql,$connect);
+	if($result==1){
+		print "<script>window.alert('수정되었습니다.')</script>";
+		print "<meta http-equiv='refresh' content='0;URL=bbs.php'>";
+	}
+	else{
+ 		$error=mysql_error();		
+		print "$sql ($error)";
+	}  
+}
+
+?>

@@ -1,0 +1,68 @@
+﻿create table bbs(
+reg_date datetime not null,
+stud_id int(8),
+title varchar(50),
+subject blob,
+seq1 int(3),
+seq2 int(3),
+seq3 int(3),
+seq4 int(3),
+seq5 int(3),
+level int(3),
+primary key(reg_date)
+);
+
+
+select * from bbs
+order by seq1 desc, seq2, seq3, seq4, seq5
+
+
+select * from bbs, stud_mst where bbs.stud_id = stud_mst.stud_id order by seq1 desc, seq2, seq3, seq4, seq5
+똑같은 필드(reg_date)가 있으므로 출력되지 않는다.
+
+select bbs.reg_date, stud_mst.stud_name, bbs.title from bbs, stud_mst where bbs.stud_id = stud_mst.stud_id order by seq1 desc, seq2, seq3, seq4, seq5
+
+====================================================================================================
+
+print "<a href='bbs.php' target = 'home'>BBS</a>";
+
+====================================================================================================
+
+<?php
+
+session_start();
+
+$connect=mysql_connect("localhost","root","");
+mysql_select_db("php",$connect);
+
+$sql="";
+$result=mysql_query($sql,$connect);
+$count=mysql_num_rows($result);
+
+if($count==0){
+	print "<script>window.alert('등록된 글이 없습니다.')</script>";
+} else {
+
+	for($k=0; $k<$count; $k++) {
+		mysql_data_seek($result,$k);
+		$row=mysql_fetch_array($result);
+		print "$row[reg_date]&nbsp;&nbsp;&nbsp;$row[stud_name]&nbsp;&nbsp;&nbsp;$row[title]<br>";
+	}
+}
+
+?>
+
+====================================================================================================
+
+select bbs.reg_date, stud_mst.stud_name, bbs.title, bbs.level from bbs, stud_mst where bbs.stud_id = stud_mst.stud_id order by seq1 desc, seq2, seq3, seq4, seq5
+
+		$i = $row[level];
+		$space = '';
+		while($i != 0) {
+			$space = $space . "&nbsp;&nbsp;";
+			$i = $i - 1;
+		}
+		print "$space$row[reg_date]&nbsp;&nbsp;&nbsp;$row[stud_name]&nbsp;&nbsp;&nbsp;$row[title]<br>";
+
+
+

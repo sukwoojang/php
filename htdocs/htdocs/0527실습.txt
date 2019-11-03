@@ -1,0 +1,75 @@
+﻿  if ((document.insert.gen[0].checked==0)&&(document.insert.gen[1].checked==0)) {
+     alert("성별을 선택하시오.");
+     document.insert.gen.focus(); 
+     return; 
+  }
+
+
+print "성별 : <input type=radio name='gen' value='M'>남&nbsp;&nbsp;<input type=radio name='gen' value='F'>여<br>";
+
+
+if ($row[gender] == 'M'){
+   $m_chk = 'checked';
+   $f_chk = '';
+} else if ($row[gender] == 'F'){
+   $f_chk = 'checked';
+   $m_chk = '';
+}
+
+
+print "성별 : <input type=radio name='gen' value='M' $m_chk>남&nbsp;&nbsp;<input type=radio name='gen' value='F' $f_chk>여<br>";
+
+$sql="insert into stud_mst(stud_id, stud_name, gender, pass, reg_date) values('$id','$name', '$gen', '$pass', sysdate())";
+
+=============================================================================================
+
+if ($row[auth] == 'S'){
+   $super_user = 'selected';
+   $normal_user = '';
+   $not_user = '';
+} else if ($row[auth] == 'N'){
+   $normal_user = 'selected';
+   $super_user = '';
+   $not_user = '';
+} else if ($row[auth] == ''){
+   $normal_user = '';
+   $super_user = '';
+   $not_user = 'selected';
+}
+
+print "권한 : <select name='auth' size=1>";
+print "<option value='S' $super_user>관리자";
+print "<option value='N' $normal_user>사용자";
+print "<option value='' $not_user>미승인";
+print "</select><br>";
+
+$sql="update stud_mst set stud_name='$name', pass='$pass', upd_date=sysdate(), auth='$auth', gender='$gen'  where stud_id='$id'";
+
+=============================================================================================
+
+if ($m == 4) {
+print "<b>*** 학생조회 ***</b>";
+print "<form name=query method=post action='./query.php' target='result'>";
+print "학번<input type=text name=id>";
+print "<select name = 'sort' size = 1>";
+print "<option value = 'A'>오름차순";
+print "<option value = 'D'>내림차순";
+print "</select>";
+
+if ($sort == 'A') {
+   $search = "$search order by stud_id asc";
+} else {
+   $search = "$search order by stud_id desc";
+}
+
+=============================================================================================
+
+print "자기소개 : <textarea name = 'intro' rows='10' cols='70'></textarea><br>";
+
+$sql="insert into stud_mst(stud_id, stud_name, gender, pass, reg_date, intro) values('$id','$name', '$gen', '$pass', sysdate(), '$intro')";
+
+=============================================================================================
+
+print "자기소개 : <textarea name = 'intro' rows='10' cols='70'>$row[intro]</textarea><br>";
+
+$sql="update stud_mst set stud_name='$name', pass='$pass', upd_date=sysdate(), auth='$auth', gender='$gen', intro='$intro' where stud_id='$id'";

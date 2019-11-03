@@ -1,0 +1,190 @@
+#html 기본구성 :
+	<html>
+		<body>
+			<form> 혹은 <table>
+			</form> or </table>
+		</body>
+	</html>
+
+#form:
+	<form name = ?? method = ??(보통post) action = "./??.php(or html)"> #action은 ""가 필요한것에 유의하자, /.는 htdocs폴더를 의미
+	여기에 아무런 문자나 가능(그대로 출력됨) <input type = submit value = "찾기"> #버튼 박스 식으로 버튼에는 30원이 표기됨 ""사용에 유의
+	위와같이 아무런 문자나 가능 <input type = text name = low> #입력방식이 직접입력하는 text 입력된 값은 $low라는 변수에 저장
+	</form> #가장 주의할 점은 input은 다른 개채들과 다르게 </input> 이런식으로 다시 닫아주지 않는다!!! 꼭 주의할 것
+
+#table:
+	<hr> #줄이 하나 표시된다
+	<table border = 2> #테이블 간격
+		<tr>#하나의 라인을 의미<td colspan = 2>#행 공간이 2칸</td></tr>#라인 하나 끝
+		<tr>#두번째 라인<td rowspan = 3>#열공간 의미<b>#볼드체<center>#중앙<font size =5 color = 'FF0000'>#글자 크기, 색깔</font></center></b></td></tr>
+		<tr><td>&nbsp#널값을의미</td></tr>
+	</table>
+
+#array: php나 html 내에 사용하는 자료형으로 파이썬의 dictionary형식과 유사
+	$example = ( "사과" >= 30, "배" >= 40, "바나나" >= 50, "포도" >= 60); #항상 한줄끝나고 ;에 유의, 문자열은 "" 숫자형은 그냥 쓰며 괄호는 ()을 사용한다
+#array 사용 예 :
+	html파일
+	<html>
+		<body>
+			<form name = f method = post action = "./f.php">
+				<input type = text name = num>
+				<input type = submit value = "실행"></form>
+		</body>
+	</html>
+	f.php
+	<php
+		$example = ( "사과" >= 30, "배" >= 40, "바나나" >= 50, "포도" >= 60);
+		
+		foreach ($example as $name >= $price) {
+			if $num >= $price {
+				print $name . " , " . $price;
+			}
+		}#이런식으로 foreach의 사용법과 array의 사용법 알아두자
+	?>
+
+#Database:
+	sql편집기 : 
+	table 생성 :
+	create table stud_mst (stud_id int(8) not null, stud_name varchar(20), pass varchar(10), primary key(stud_id)); #이런식으로 테이블 생성한다.
+	
+	record 생성:
+	insert into stud_mst (stud_id, stud_name, pass)
+	values ('12130482', 'jang', '542ab'); #insert하는 값들에 ''사용하는 것에 유의 (int형이라도)
+
+	조회:
+	select 필드 from 테이블 where 조건 형식
+	ex : select stud_name from stud_mst where stud_id like '12%';
+		where stud_id = '12130482';
+		where stud_id = '12130482' and stud_name like 'j%';
+	#뒤에서 배우지만 필드명에 count(*)를 사용할 시 해당 조건에 맞는 레코드 개수를 반환한다
+
+#프로그래밍:
+	출력 :
+		print "안녕하세요"; or print ("안녕하세요");
+	주석:
+		//, # : 한줄 주석
+		/* ~ */ : 블록 주석
+		#하나 출제 될거 같다, 낚이지말자.
+	변수:
+		변수는 $로 시작한다
+		변수의 이름은 영문 대문자, 소문자, 숫자, _로 이루어진다
+		첫문자는 숫자로 사용할 수 없다
+		""내에서 변수를 사용해도 실행 가능 ex: $sum -> "$sum"
+	연산자:
+		증가연산자 : ex: $temp++ -> $temp = $temp + 1
+		감소연산자 : ex: --$temp -> $temp = $temp - 1
+		대입연산자 : +=, -=, *=, /=. %=
+	수학함수:
+		M_PI : pi
+		asin(), acos(), atan() : 역삼각함수
+	if문 : 기본구성
+		if (condition)
+			statement(이부분은 {}로 묶어줘도 된다 여러줄일경우);
+		elseif (condition) or if (condition) #또다른 조건 추가할때 두가지 방법 모두 가능
+		else (condition)
+	if문 : 또 다른 형식 예시
+		$num = 5;
+		(($num % 2) == 1) ? print "홀수" : print "짝수"; #형식은 statement ? print "True일시" : print "False 일시";
+	비교연산자 : ==, !=, <, >, <=, >= 
+	논리연산자 : 
+		! : not
+		&& : and
+		|| : or
+		xor : 하나는 True 다른 하나는 False일 때 True
+	while문 : 기본구성
+		while (expr) {
+			statement;}
+		무한반복
+		while (TRUE) { #대소문자 구분이 있는지 모르므로 TRUE는 대문자로 쓰자
+			statement;
+			if (condition)
+			break;
+		}
+	do-while문 : 무한반복 while문과 같은 기능으로 예시
+		do {
+			statement;
+		} while (expr); # ;에 유의하자
+	함수 정의 : 예시
+		function sum ($x, $y=0) { #인자에 =0를 하면 default값 설정
+			$result = $x + $y;
+			return $result;
+		}
+#meta : html내 <head>헤더태그 사이에 위치하며 </head> 수업중에 사용한 예시로는
+	<meta http-equiv = "refresh" content = "0; url = http://192.168.101.2/test.php">
+	의미는 0초후에(content) 해당 url을 불러오는 의미로 content뒤에 ;에 유의하자
+	큰따옴표 사용에도 유의하자
+	<meta http-equiv = "refresh" content = "5 ; url = sdss">
+
+*아래 코드 이해하자
+<?PHP
+$i = 3;
+
+print ++$i;
+
+print $i++;
+
+print "<p>";
+
+print $i += $i;
+?>
+실행결과는 4 4 10
+
+#frame : 한 웹페이지를 여러개의 프레임으로 나눌 수 있다
+#body안에 쓰면 되고 독자의 공간에서 써야됨 꼭 유의!!!!
+	<html>
+		<head>
+		<title>장석우</title>
+		</head>
+		
+		<frameset rows = "60,*"> #body안에 만드는게 아니다 rows로 열너비 cols로 행넓이를 할당해줄 수 있다
+			<frame src = "top.php" name = "top" frameborder = "yes" SCROLLING = "yes"> #frame내 소스코드는 뭘 쓸지 프레임 이름, frameborder, scrooling허용여부 등을 지정해줄 수 있다
+			<frame src = "bottom.php" name = "bottom" frameborder = "no" SCROLLING = "no">
+		</frameset> 
+	</html>
+
+
+#radiobutton : <input type = 'radio' name = 'm' value = '3' checked> #default값으로 체크되어있는 라디오버튼
+
+#select : 메뉴만드는 두가지 방법
+	#radiobutton:체크박스형태
+	<form name = menu method = post action = "">
+		<input type = 'radio' name = 'm' value = '1'>홀짝<br> #이걸채크하면 m이라는 변수에 1저장
+		<input type = 'radio' name = 'm' value = '2'>덧셈
+		<input type = 'radio' name = 'm' value = '3'>
+		<input type = submit value = "선택">
+	</form>
+
+	#select 방식
+	<form name = menu method = post action = "">
+		<select name = 'm' size = 1> #콤보박스같은 형태로 한번에 출력되는 아이템의 개수를 사이즈에 입력
+			<option value = '1'>홀짝
+			<option value = '2' selected>덧셈
+			<option value = '3'>factorial
+		</select>
+		<input type = submit value = "선택">
+	</form> #이런식으로도 메뉴를 만들 수 있다
+
+#javascript : html에서사용하는 기준 예시
+	<script language = "javascript"> #언어를 javascript로 생성한다
+		function f_check_evenOdd(){
+			if (document.evenOdd.number.value.length == 0) {
+				alert ("안녕하세요");
+				document.evenOdd.number.focus();
+				return; #함수내에서 끝날때 return이 없어도 return을 하는 것을 잊지말자
+			}
+			document.evenOdd.submit(); #조건에 해당하지 않는다면 그대로 실행
+		}
+	</script>
+
+	<html>
+		<body>
+			<form name = evenOdd method = post action = "./evenOdd.php" target = "result">#target뒤에 ''쓰든 안쓰든 상관없다
+				<b>*** even odd *** </b>
+				정수를 입력하시오 <input type = text name = number> <a href = "javaScript:f_check_evenOdd()">입력</a> #어떤식으로 위의 자바스크립트 함수와 연결하여 사용하는지 알아두자
+				<input type = 'checkbox' name = disp value = '1' checked>입력값 표시
+			</form>
+		</body>
+	</html>
+	
+
+#" ' 사용에 유의하자 ""안에서 문자열 넣을때는 무조건 '사용할것!!!!

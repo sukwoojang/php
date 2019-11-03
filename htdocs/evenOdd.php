@@ -1,0 +1,10 @@
+<?PHP
+ $result = $number % 2;
+
+ if ($disp == 1)
+	print $number . "Àº(´Â) ";
+ if (result == 0)
+	print "Â¦¼ö";
+ else
+	print "È¦¼ö";
+?>
